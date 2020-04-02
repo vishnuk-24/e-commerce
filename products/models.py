@@ -7,6 +7,13 @@ from django.urls import reverse
 
 from core.models import BaseModel
 
+LABEL_CHOICES = (
+    ('P', 'primary'),
+    ('S', 'secondary'),
+    ('D', 'danger')
+)
+
+
 class Brand(BaseModel):
     """Brand model for store each brands"""
 
@@ -57,7 +64,8 @@ class Product(BaseModel):
     brand = models.ForeignKey(Brand, verbose_name=("brand name"), on_delete=models.CASCADE, db_index=True, blank=True, null=True)
     department = models.CharField(max_length=200, blank=True, null=True)
     category = models.ForeignKey(Category, verbose_name=("Category name"), on_delete=models.CASCADE, db_index=True, blank=True, null=True)
-
+    label = models.CharField(choices=LABEL_CHOICES, max_length=1)
+    
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='products/product-images/', blank=True, null=True)
 
