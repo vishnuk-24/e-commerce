@@ -80,8 +80,8 @@ class ProductListView(ListView):
         context['brands'] = Brand.objects.all().exclude(name="not available")
         print('context with band and category', context)
         return context
-    
-    
+
+
 
 class ProductDetailView(DetailView):
     """ProductDetailView for the details of a product."""
@@ -95,7 +95,7 @@ class ProductDetailView(DetailView):
         product = self.model.objects.exclude(enabled=False)
         print('queryset', product)
         return product
-    
+
     def get_context_data(self, **kwargs):
         print('ENTER INTO GET_CONTEXT_DATA')
         context = super(ProductDetailView, self).get_context_data(**kwargs)
@@ -103,8 +103,8 @@ class ProductDetailView(DetailView):
         context['brand'] = Product.objects.get(pk=self.kwargs['pk']).brand.name
         print('context', context)
         return context
-    
-  
+
+
 class AddToCartView(View):
     """AddtoCartView for adding all order items."""
 
