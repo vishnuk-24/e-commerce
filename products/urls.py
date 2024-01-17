@@ -1,5 +1,7 @@
 """Products urls.py"""
 
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from django.views.generic import TemplateView
 from . import views
@@ -7,14 +9,16 @@ from . import views
 app_name = 'products'
 
 urlpatterns = [
+
     path('', views.index, name='index'),
 
-    path('about/', TemplateView.as_view(template_name="base.html")),
+    path('home/', views.IndexListView.as_view(), name="home"),
 
-    path('product/', TemplateView.as_view(template_name="product-page.html")),
-    # path('products/', views.ProductListView.as_view(), name="products"),
-    # path('product-detail/(?P<pk>[0-9a-f-]+)/$', views.ProductDetailView.as_view(), name="product_detail"),
+    path('products/', views.ProductListView.as_view(), name="products"),
+
+    path('product-detail/<pk>/', views.ProductDetailView.as_view(), name="product_detail"),
+
+    path('add-to-cart/', views.AddToCartView.as_view(), name="add-to-cart"),
+
+    path('categories/<pk>/', views.CategoryListView.as_view(), name="category_list"),
 ]
-
-# url(r'^products/$', views.ProductListView.as_view(), name="products"),
-# url(r'^product-detail/(?P<pk>[0-9]+)/$', views.ProductDetailView.as_view(), name="product_detail"),
